@@ -145,6 +145,9 @@ public class Bowling {
 
   public void clearFrame() {
     this.frames = new ArrayList<>();
+    numberOfFrame = 1;
+    numberOfLancer = 1;
+    score = 0;
   }
 
   public boolean isDone() {
