@@ -41,16 +41,13 @@ public class Bowling {
       frame.addNextPin(pins);
       if (frame.getNextPins().size() < LANCERS_PER_FRAME) {
         numberOfLancer += 1;
-      } else if (numberOfLancer < LANCERS_PER_FRAME) {
-        numberOfLancer += 1;
-      } else {
-        numberOfLancer = 1;
       }
+
       if (pins == MAX_PINS) {
-        numberOfLancer = 1;
         if (numberOfFrame < MAX_FRAME_PER_PLAYER) {
           numberOfFrame += 1;
         }
+        numberOfLancer = 1;
       } else if (frame.getSumNextPins() == MAX_PINS) {
         numberOfFrame += 1;
         numberOfLancer = 1;
@@ -90,7 +87,7 @@ public class Bowling {
             if (frames.size() < MAX_FRAME_PER_PLAYER) {
               frames.add(new Frame());
               numberOfFrame += 1;
-              numberOfFrame += 1;
+              numberOfLancer = 1;
             }
           }
         }
@@ -145,9 +142,7 @@ public class Bowling {
   }
 
   public void clearFrame() {
-    this.numberOfLancer = 0;
-    this.frames = new ArrayList<>();
-    this.numberOfFrame = 0;
+    this.frames.clear();
   }
 
   public boolean isDone() {
