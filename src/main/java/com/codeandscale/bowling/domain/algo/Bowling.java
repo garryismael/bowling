@@ -32,7 +32,9 @@ public class Bowling {
     if (frames.size() == 0) {
       frames.add(new Frame());
     }
-    Frame frame = frames.getLast();
+
+    int lastIndex = frames.size() - 1;
+    Frame frame = frames.get(lastIndex);
 
     if (
       (frame.isStrike() && frame.getNextPins().size() < LANCERS_PER_FRAME) ||
@@ -62,7 +64,7 @@ public class Bowling {
           List<Integer> nextPins = frame.getNextPins();
           int nextPinsSize = frame.getNextPins().size();
           int sumOfNextPins = frame.getSumNextPins();
-          if (frame.getNextPins().getFirst() == MAX_PINS) {
+          if (frame.getNextPins().get(0) == MAX_PINS) {
             newFrame.setStrike(true);
             newFrame.setNextPins(frame.getNextPins().subList(1, nextPinsSize));
           } else if (sumOfNextPins == MAX_PINS) {
@@ -126,7 +128,7 @@ public class Bowling {
   }
 
   private int getIndexOfSpare(List<Integer> nextPins) {
-    int sum = nextPins.getFirst();
+    int sum = nextPins.get(0);
     int i = 1;
     while (sum < MAX_PINS) {
       sum += nextPins.get(i);
@@ -142,12 +144,13 @@ public class Bowling {
   }
 
   public void clearFrame() {
-    this.frames.clear();
+    this.frames = new ArrayList<>();
   }
 
   public boolean isDone() {
     if (frames.size() == MAX_FRAME_PER_PLAYER) {
-      Frame lastFrame = frames.getLast();
+      int lastIndex = frames.size() - 1;
+      Frame lastFrame = frames.get(lastIndex);
       if (
         !lastFrame.isStrike() &&
         !lastFrame.isSpare() &&
